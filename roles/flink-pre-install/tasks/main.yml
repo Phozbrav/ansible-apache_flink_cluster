@@ -1,0 +1,12 @@
+---
+- name: "Verify if apache flink service is existing"
+  stat:
+    path: "/lib/systemd/system/flink.service"
+  register: flink_result
+
+- name: "Stop apache flink cluster"
+  systemd:
+    name: flink
+    state: stopped
+  when:
+    flink_result.stat.exists == True

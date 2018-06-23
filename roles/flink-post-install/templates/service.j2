@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache Flink
+StartLimitIntervalSec=0
+
+[Service]
+Type=forking
+User=root
+ExecStart={{ installation_path }}/flink-{{ apache_flink_version }}/bin/start-cluster.sh
+ExecStop={{ installation_path }}/flink-{{ apache_flink_version }}/bin/stop-cluster.sh
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=default.target

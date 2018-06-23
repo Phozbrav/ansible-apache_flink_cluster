@@ -1,0 +1,21 @@
+---
+- name: "Pre-install apache flink cluster"
+  hosts: FlinkJobManager
+  gather_facts: true
+
+  roles:
+    - flink-pre-install
+
+- name: "Deploy apache flink cluster"
+  hosts: FlinkJobManager:FlinkTaskManager
+  gather_facts: true
+
+  roles:
+    - flink-install
+
+- name: "Post-install apache flink cluster"
+  hosts: FlinkJobManager
+  gather_facts: true
+
+  roles:
+    - flink-post-install

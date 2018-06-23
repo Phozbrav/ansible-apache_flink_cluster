@@ -1,0 +1,12 @@
+---
+- name: "Create apache flink service system"
+  template:
+    src: service.j2
+    dest: "/lib/systemd/system/flink.service"
+
+- name: "Setup flink service (enabled / restarted)"
+  systemd:
+    name: flink
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
