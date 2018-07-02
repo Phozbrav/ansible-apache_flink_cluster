@@ -4,5 +4,7 @@
 apache_flink_version: 1.5.0
 apache_flink_url: "https://archive.apache.org/dist/flink/flink-{{ apache_flink_version }}/flink-{{ apache_flink_version }}-bin-scala_2.11.tgz"
 
+shell_name: zsh
 installation_path: /opt
+
 nb_task_manager_slots: 2

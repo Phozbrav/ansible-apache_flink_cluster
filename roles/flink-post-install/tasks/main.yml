@@ -1,4 +1,11 @@
 ---
+- name: "Add flink alias for {{ shell_name }}"
+  lineinfile:
+    dest: ".{{ shell_name }}rc"
+    line: 'alias flink="{{ installation_path }}/flink-{{ apache_flink_version }}/bin/flink"'
+    regexp: "^alias flink="
+    insertafter: EOF
+
 - name: "Create apache flink service system"
   template:
     src: service.j2
@@ -10,3 +17,15 @@
     enabled: yes
     daemon_reload: yes
     state: restarted
+
+- name: "Reboot server"
+  command: "sleep 3 && reboot"
+  async: 1
+  poll: 0
+
+- name: "Wait for the reboot to complete"
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 300
